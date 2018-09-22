@@ -1,5 +1,20 @@
 <?php
 
+function get_videos_by_year($videoYear) {
+    global $db;
+    $query = 'SELECT * FROM video
+              WHERE videoYear = :videoYear
+              ORDER BY videoName';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":videoYear", $videoYear);
+    $statement->execute();
+    $videos = $statement->fetchAll();
+    $statement->closeCursor();
+    return $videos;
+}
+
+/*
+
 function get_recipe($recipeID) {
     global $db;
     $query = 'SELECT * FROM recipe
@@ -80,18 +95,7 @@ function sort_recipes_by_created() {
     return $recipes;
 }
 
-function get_recipes_by_category($recipeCategory) {
-    global $db;
-    $query = 'SELECT * FROM recipe
-              WHERE recipeCategory = :recipeCategory
-              ORDER BY recipeName';
-    $statement = $db->prepare($query);
-    $statement->bindValue(":recipeCategory", $recipeCategory);
-    $statement->execute();
-    $recipes = $statement->fetchAll();
-    $statement->closeCursor();
-    return $recipes;
-}
+
 
 function get_recipes_by_contributor($recipeContributor) {
     global $db;
@@ -160,4 +164,4 @@ function edit_recipe($recipeID, $recipeName, $recipeCategory, $recipeContributor
     $statement->bindValue(':recipeInstructions', $recipeInstructions);
     $success = $statement->execute();
     $statement->closeCursor();    
-}
+}*/

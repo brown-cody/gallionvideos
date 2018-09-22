@@ -4,7 +4,7 @@ require('model/database.php');
 
 // Get the models
 require('model/year_db.php');
-//require('model/recipe_db.php');
+require('model/video_db.php');
 //require('model/search_db.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
@@ -20,11 +20,11 @@ switch ($action) {
         $years = get_years();
         include('menuview.php');
         break;
-    case 'categoryview':
-        $categories = get_categories();
-        $categoryID = filter_input(INPUT_GET, 'categoryID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        $recipes = get_recipes_by_category($categoryID);
-        include('categoryview.php');
+    case 'yearview':
+        $years = get_years();
+        $yearID = filter_input(INPUT_GET, 'yearID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        $videos = get_videos_by_year($yearID);
+        include('yearview.php');
         break;
     case 'contributorview':
         $recipeContributor = filter_input(INPUT_GET, 'recipeContributor', FILTER_SANITIZE_STRING);

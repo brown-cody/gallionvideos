@@ -43,4 +43,4 @@
         <?php echo $recipe['recipeInstructions']; ?>
     </p>
   
-<?php include("recipefooter.php"); ?>
+<?php include("videofooter.php"); ?>
