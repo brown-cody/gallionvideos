@@ -7,10 +7,10 @@
         
         <link rel="icon" href="/gallionvideos/favicon.ico" type="image/x-icon">
         
-        <title>Gallion Videos</title>
+        <title>Tucker Gallion Video Library</title>
 
         <link type="text/css" href="https://necolas.github.io/normalize.css/8.0.0/normalize.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="/gallionvideos/style.css">
         
         <!-- fix mobile sizing-->
@@ -20,6 +20,7 @@
     <body>
 
         <header>
-            <a href="/gallionvideos/index.php"><img class="logo" src="/gallionvideos/view/logo.png"></a>
-            <div class="pageTitle">Gallion Videos</div>
+            <a class="titleLink" href="/gallionvideos/index.php">
+                <div class="pageTitle">Tucker Gallion Video Library</div>
+            </a>
         </header>

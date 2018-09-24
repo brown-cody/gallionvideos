@@ -13,20 +13,20 @@ function get_videos_by_year($videoYear) {
     return $videos;
 }
 
-/*
 
-function get_recipe($recipeID) {
+
+function get_video($videoID) {
     global $db;
-    $query = 'SELECT * FROM recipe
-              WHERE recipeId = :recipeID';
+    $query = 'SELECT * FROM video
+              WHERE videoId = :videoID';
     $statement = $db->prepare($query);
-    $statement->bindValue(":recipeID", $recipeID);
+    $statement->bindValue(":videoID", $videoID);
     $statement->execute();
-    $recipe = $statement->fetch();
+    $video = $statement->fetch();
     $statement->closeCursor();
-    return $recipe;
+    return $video;
 }
-
+/*
 function get_recipes() {
     global $db;
     

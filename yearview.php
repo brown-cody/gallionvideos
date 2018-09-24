@@ -12,7 +12,7 @@
 
     
     
-    <?php foreach($recipes as $recipe): ?>
+    <?php foreach($videos as $video): ?>
         <form action="index.php" method="get">
             <input type="hidden" name="action" value="videoview">
             <input type="hidden" name="videoID" value="<?php echo $video['videoID'];?>">

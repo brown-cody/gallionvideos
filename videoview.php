@@ -1,46 +1,36 @@
 <?php include("header.php"); ?>
 
-        <h2><?php echo $recipe['recipeName']; ?></h2>
+        <h2><?php echo $video['videoName']; ?></h2>
         <h3>
             <?php
-                foreach($categories as $category) {
-                    if ($recipe['recipeCategory'] == $category['categoryID']) {
-                        echo '<a href="index.php?action=categoryview&categoryID='.$category['categoryID'].'">';
-                        echo $category['categoryName'];
+                foreach($years as $year) {
+                    if ($video['videoYear'] == $year['yearID']) {
+                        echo '<a href="index.php?action=yearview&yearID='.$year['yearID'].'">';
+                        echo $year['year'];
                         echo '</a>';
                     }
                 }
             ?>
             
         </h3>
-        <h4>
-            <?php
-                $contributorEdited = str_replace(" ","+",$recipe['recipeContributor']);
-                echo '<a href="index.php?action=contributorview&recipeContributor='.$contributorEdited.'">';
-                echo $recipe['recipeContributor'];
-                echo '</a>';
-            ?>
-        </h4>
-    <?php
-        if (file_exists('images/'.$recipe['recipeID'].'.jpg')) {
-            echo '<img class="image" src="images/'.$recipe['recipeID'].'.jpg"'.'>';
-        }
-    ?>
-    
-    
-    <ul class="ingredients">
         
-        <?php
-            $ingredients = explode(",", $recipe['recipeIngredients']);
-            foreach($ingredients as $ingredient) {
-                echo "<li>".$ingredient."</li>";
-            }
-        ?>
+ 
+
+    <iframe class="video" src="https://www.youtube.com/embed/<?php echo $video['videoEmbed']; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     
-    </ul>
-    
-    <p class="instructions">
-        <?php echo $recipe['recipeInstructions']; ?>
+    <p class="description">
+        Description:<br>
+        <?php echo $video['videoDescription']; ?>
+    </p>
+
+    <p class="locationTag">
+        Locations:<br>
+        <?php echo $video['videoLocationTag']; ?>
+    </p>
+
+    <p class="personTag">
+        People:<br>
+        <?php echo $video['videoPersonTag']; ?>
     </p>
   
 <?php include("videofooter.php"); ?>

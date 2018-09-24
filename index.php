@@ -31,14 +31,14 @@ switch ($action) {
         $recipes = get_recipes_by_contributor($recipeContributor);
         include('contributorview.php');
         break;
-    case 'recipeview':
-        $recipeID = filter_input(INPUT_GET, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        if ($recipeID == 0 || $recipeID == null) {
-            $recipeID = 1;
+    case 'videoview':
+        $videoID = filter_input(INPUT_GET, 'videoID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        if ($videoID == 0 || $videoID == null) {
+            $videoID = 1;
         }
-        $recipe = get_recipe($recipeID);
-        $categories = get_categories();
-        include('recipeview.php');
+        $video = get_video($videoID);
+        $years = get_years();
+        include('videoview.php');
         break;
     case 'search':
         $searchText = filter_input(INPUT_POST, 'searchText', FILTER_SANITIZE_STRING);

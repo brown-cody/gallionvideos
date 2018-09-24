@@ -9,11 +9,6 @@ body {
     margin:auto;
 }
 
-header {
-    width:268px;
-    margin:auto;
-}
-
 a {
     color:floralwhite;
     text-decoration: none;
@@ -36,18 +31,32 @@ a:visited {
     color:#303030;
 }
 
+header {
+    /*width:268px;*/
+    margin:auto;
+}
+
 .logo {
     max-width:50px;
     max-height:50px;
     float:left;
-    padding:1em;
+    padding:em;
+    display:none;
 }
 
 .pageTitle {
-    float:left;
+    /*float:left;*/
+    display:block;
+    margin:auto;
+    text-align: center;
     font-size: 2em;
     margin-top:.75em;
-    font-family: 'Fredericka the Great', cursive;
+    font-family: 'Righteous', cursive;
+    width: 8em;
+}
+
+.titleLink:hover {
+    text-decoration: none;
 }
 
 h2 {
@@ -90,7 +99,7 @@ h4 {
     color:floralwhite;
 }
 
-.recipeButton {
+.videoButton {
     background:none;
     border:none;
     color:floralwhite;
@@ -99,7 +108,7 @@ h4 {
     margin-top:.5em;
 }
 
-.recipeButton:hover {
+.videoButton:hover {
     background:floralwhite;
     color:#303030;
 }
@@ -109,12 +118,18 @@ h4 {
     padding:.5em;
 }
 
-.ingredients {
-    
+.description, .locationTag, .personTag {
+    padding:1em;
+    max-width:23em;
+    margin:auto;
 }
 
-.instructions {
+.video {
     padding:1em;
+    width:400px;
+    height:300px;
+    display:block;
+    margin:auto;
 }
 
 footer {
@@ -143,16 +158,12 @@ footer {
     margin:auto;
 }
 
-.recipeTable {
+.videoTable {
     width:100%;
     border-collapse: collapse;
 }
 
-/*.recipeTable td {
-    border: solid black 1px;
-}*/
-
-.recipeTable tr:hover {
+.videoTable tr:hover {
     background:#505050;
 }
 
@@ -305,7 +316,7 @@ footer {
 @media only screen and (min-width: 390px) {
     
     header {
-        width:390px;
+        /*width:390px;*/
     }
     
     .logo {
@@ -318,7 +329,7 @@ footer {
         margin-top:.6em
     }
     
-    .recipeTable {
+    .videoTable {
         width:calc(100% - 4em);
         margin-left:2em;
         margin-right:2em;
@@ -328,7 +339,7 @@ footer {
 @media only screen and (min-width: 475px) {
     
     header {
-        width:475px;
+        /*width:475px;*/
     }
     
     .logo {
@@ -337,7 +348,7 @@ footer {
     }
     
     .pageTitle {
-        font-size: 3.75em;
+        font-size: 3em;
         margin-top:.5em;
     }
     
@@ -346,9 +357,26 @@ footer {
     }
 }
 
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 850px) {
     
-
+    header {
+        /*width:870px;*/
+    }
+    
+    .pageTitle {
+        width:14em;
+        font-size: 3.8em;
+    }
+    
+    .video {
+        width:800px;
+        height:600px;
+    }
+    
+    .description, .locationTag, .personTag {
+        max-width:35em;
+    }
+    
     .hideDates {
         display:table-cell;
     }
