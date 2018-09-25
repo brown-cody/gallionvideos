@@ -4,22 +4,22 @@
     <h3 class="error"><?php if(isset($error)) echo $error; ?></h3>
     <h3><?php if(isset($success)) echo $success; ?></h3>
     <form action="index.php" method="post">
-        <input type="hidden" name="action" value="addcategory">
-        <button type="submit" class="mainButton">Add Category</button>
+        <input type="hidden" name="action" value="addyear">
+        <button type="submit" class="mainButton">Add Year</button>
     </form>
     
-    <table class="categoryTable">
+    <table class="yearTable">
 
-        <?php foreach($categories as $category): ?>
+        <?php foreach($years as $year): ?>
             <?php echo "<tr><td>"; ?>
             <form action="index.php" method="post">
-                <input type="hidden" name="action" value="editcategory">
-                <input type="hidden" name="categoryID" value="<?php echo $category['categoryID'];?>">
+                <input type="hidden" name="action" value="edityear">
+                <input type="hidden" name="yearID" value="<?php echo $category['yearID'];?>">
                 <button type="submit" class="editButton">Edit</button>
             </form>
             <?php echo "</td><td>"; ?>
-            <?php echo '<a href="..\index.php?action=categoryview&categoryID='.$category['categoryID'].'">'; ?>
-            <?php echo $category['categoryName']; ?>
+            <?php echo '<a href="..\index.php?action=yearview&yearID='.$year['yearID'].'">'; ?>
+            <?php echo $year['year']; ?>
             <?php echo '</a>'; ?>
             <?php echo "</td></tr>"; ?>
             
@@ -29,44 +29,44 @@
     <hr>
 
     <form action="index.php" method="post">
-        <input type="hidden" name="action" value="addrecipe">
-        <button type="submit" class="mainButton">Add Recipe</button>
+        <input type="hidden" name="action" value="addvideo">
+        <button type="submit" class="mainButton">Add Video</button>
     </form>
     <h4>To add or change an image, click on the thumbnail, select the image, then click on the UP arrow.</h4>
     <br>
 
-    <table class="recipeTable">
+    <table class="videoTable">
         <tr id="headerRow">
             <th></th>
-            <th><a href="index.php?subaction=recipesort" class="sortHeading">Recipe</a></th>
-            <th><a href="index.php?subaction=categorysort" class="sortHeading">Category</a></th>
-            <th class="hideContributor"><a href="index.php?subaction=contributorsort" class="sortHeading">Contributor</a></th>
-            <th><a href="index.php?subaction=imagesort" class="sortHeading">Image</a></th>
+            <th><a href="index.php?subaction=videosort" class="sortHeading">Video</a></th>
+            <th><a href="index.php?subaction=yearsort" class="sortHeading">Year</a></th>
+            <th class="hideLocation"><a href="index.php?subaction=locationsort" class="sortHeading">Location</a></th>
+            <th><a href="index.php?subaction=embedsort" class="sortHeading">Embed Code</a></th>
             <th class="hideDates"><a href="index.php?subaction=updatedsort" class="sortHeading">Updated</a></th>
             <th class="hideDates"><a href="index.php?subaction=createdsort" class="sortHeading">Added</a></th>
         </tr>
-        <?php foreach($recipes as $recipe): ?>
+        <?php foreach($videos as $video): ?>
             <tr>
                 <td>
                     <form action="index.php" method="post">
-                        <input type="hidden" name="action" value="editrecipe">
-                        <input type="hidden" name="recipeID" value="<?php echo $recipe['recipeID'];?>">
+                        <input type="hidden" name="action" value="editvideo">
+                        <input type="hidden" name="videoID" value="<?php echo $video['videoID'];?>">
                         <button type="submit" class="editButton">Edit</button>
                     </form>
                 </td>
                 <td>
-                    <?php echo '<a href="..\index.php?action=recipeview&recipeID='.$recipe['recipeID'].'">'; ?>
-                    <?php echo $recipe['recipeName']; ?>
+                    <?php echo '<a href="..\index.php?action=videoview&videoID='.$video['videoID'].'">'; ?>
+                    <?php echo $video['videoName']; ?>
                     <?php echo '</a>'; ?>
                 </td>
                 <td>
                     <?php
-                        if ($recipe['recipeCategory'] == null) {
+                        if ($video['videoYear'] == null) {
                             echo "<div style='background:red;'>ORPHAN</div>";    
-                        } else foreach($categories as $category) {
-                            if ($recipe['recipeCategory'] == $category['categoryID']) {
-                                echo '<a href="..\index.php?action=categoryview&categoryID='.$category['categoryID'].'">';
-                                echo $category['categoryName'];
+                        } else foreach($years as $year) {
+                            if ($video['videoYear'] == $year['yearID']) {
+                                echo '<a href="..\index.php?action=yearview&yearID='.$year['yearID'].'">';
+                                echo $year['year'];
                                 echo '</a>';
                             }
                         }
@@ -74,56 +74,22 @@
 
                     ?>
                 </td>
-                <td  class="hideContributor">
-                    <?php $contributorEdited = str_replace(" ","+",$recipe['recipeContributor']); ?>
-                    <?php echo '<a href="..\index.php?action=contributorview&recipeContributor='.$contributorEdited.'">'; ?>
-                    <?php echo $recipe['recipeContributor']; ?>
+                <td  class="hideLocation">
+                    <?php $locationEdited = str_replace(" ","+",$video['videoLocation']); ?>
+                    <?php echo '<a href="..\index.php?action=locationview&videoLocation='.$locationEdited.'">'; ?>
+                    <?php echo $video['videoLocation']; ?>
                     <?php echo '</a>'; ?>
                 </td>
-                <td class="imageCell">
-                    
-                    <form action="index.php" method="post" class="formFloat middle">
-                        <input type="hidden" name="action" value="confirmation">
-                        
-                        <input type="hidden" name="subaction" value="deleteimage">
-        
-                        <input type="hidden" name="recipeID" value="<?php echo $recipe['recipeID']; ?>">
-        
-                        <button type="submit" class="uploadButton middle delete <?php if (file_exists("../images/".$recipe['recipeID'].".jpg")) {}else{echo "notVisible";} ?>">X</button>
-
-                    </form>
-                    
-                    <form action="index.php" method="post" enctype="multipart/form-data" class="formFloat">
-                        <input type="hidden" name="action" value="upload">
-                        <input type="hidden" name="recipeID" value="<?php echo $recipe['recipeID'];?>">
-                        <input type="hidden" name="recipeName" value="<?php echo $recipe['recipeName'];?>">
-                        <input type="file" name="imageUpload<?php echo $recipe['recipeID'];?>" id="imageUpload<?php echo $recipe['recipeID'];?>" class="hidden">
-                        <label for="imageUpload<?php echo $recipe['recipeID'];?>" class="imageLabel middle">
-                            <?php
-                                if (file_exists("../images/".$recipe['recipeID'].".jpg")) {
-                                    echo '<img src="../images/'.$recipe['recipeID'].'.jpg" class="uploadIcon middle">';
-                                } else {
-                                    echo '<img src="image.png" class="uploadIcon middle">';
-                                }
-                            ?>
-                            
-                        </label>
-                        <button type="submit" name="SubmitBtn" class="uploadButton middle">&#8593</button>
-                    </form>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-    
+                <td>
+                    <?php echo '<a href="https://www.youtube.com/watch?v='.$video['videoEmbed'].'" target="_blank">'; ?>
+                    <?php echo $video['videoEmbed']; ?>
+                    <?php echo '</a>'; ?>
                 </td>
                 <td class="hideDates">
-                    <?php echo $recipe["recipeDateEdited"]; ?>
+                    <?php echo $video["videoDateEdited"]; ?>
                 </td>
                 <td class="hideDates">
-                    <?php echo $recipe["recipeDateAdded"]; ?>
+                    <?php echo $video["videoDateAdded"]; ?>
                 </td>
             </tr>
         <?php endforeach; ?>

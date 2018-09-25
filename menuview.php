@@ -1,6 +1,6 @@
 <?php include("header.php"); ?>
 
-        <h2>Menu</h2>
+        <h2>Main Menu</h2>
         <br>
         <form action="index.php" method="post" class="searchForm">
             <input type="hidden" name="action" value="search">

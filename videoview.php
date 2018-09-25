@@ -25,7 +25,7 @@
 
     <p class="locationTag">
         Locations:<br>
-        <?php echo $video['videoLocationTag']; ?>
+        <?php echo $video['videoLocation']; ?>
     </p>
 
     <p class="personTag">

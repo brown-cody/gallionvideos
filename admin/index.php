@@ -3,8 +3,8 @@
 require('../model/database.php');
 
 // Get the models
-require('../model/category_db.php');
-require('../model/recipe_db.php');
+require('../model/year_db.php');
+require('../model/video_db.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 if ($action == NULL) {
@@ -17,15 +17,15 @@ if ($action == NULL) {
 switch ($action) {
     case 'adminview':
         $subaction = filter_input(INPUT_GET, 'subaction', FILTER_SANITIZE_STRING);
-        $recipes = get_recipes();
+        $videos = get_videos();
         switch ($subaction) {
-            case 'recipesort':
+            case 'videosort':
                 break;
-            case 'categorysort':
-                $recipes = sort_recipes_by_category();
+            case 'yearsort':
+                $videos = sort_videos_by_year();
                 break;
-            case 'contributorsort':
-                $recipes = sort_recipes_by_contributor();
+            case 'locationsort':
+                $videos = sort_videos_by_location();
                 break;
             case 'imagesort':
                 $recipes = sort_recipes_by_image();
@@ -39,93 +39,95 @@ switch ($action) {
             default:
                 break;
         }
-        $categories = get_categories();
+        $years = get_years();
         include('view\adminview.php');
         break;
-    case 'addcategory':
-        include('view\addcategoryview.php');
+    case 'addyear':
+        include('view\addyearview.php');
         break;
-    case 'editcategory':
-        $categoryID = filter_input(INPUT_POST, 'categoryID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        if ($categoryID == null) {
-            $categoryID = filter_input(INPUT_GET, 'categoryID', FILTER_SANITIZE_STRING);
+    case 'edityear':
+        $yearID = filter_input(INPUT_POST, 'yearID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        if ($yearID == null) {
+            $yearID = filter_input(INPUT_GET, 'yearID', FILTER_SANITIZE_STRING);
         }
-        $category = get_category($categoryID);
-        include('view\editcategoryview.php');
+        $year = get_year($yearID);
+        include('view\edityearview.php');
         break;
-    case 'saveeditcategory':
-        $categoryID = filter_input(INPUT_POST, 'categoryID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_STRING);
-        edit_category($categoryID, $categoryName);
-        $recipes = get_recipes();
-        $categories = get_categories();
+    case 'saveedityear':
+        $yearID = filter_input(INPUT_POST, 'yearID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        $year = filter_input(INPUT_POST, 'year', FILTER_SANITIZE_STRING);
+        edit_year($yearID, $year);
+        $videos = get_videos();
+        $years = get_years();
         include('view\adminview.php');
         break;
-    case 'saveaddcategory':
-        $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_STRING);
-        add_category($categoryName);
-        $recipes = get_recipes();
-        $categories = get_categories();
+    case 'saveaddyear':
+        $year = filter_input(INPUT_POST, 'year', FILTER_SANITIZE_STRING);
+        add_year($year);
+        $videos = get_videos();
+        $years = get_years();
         include('view\adminview.php');
         break;
-    case 'deletecategory':
-        $categoryID = filter_input(INPUT_POST, 'categoryID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        delete_category($categoryID);
-        $recipes = get_recipes();
-        $categories = get_categories();
+    case 'deleteyear':
+        $yearID = filter_input(INPUT_POST, 'yearID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        delete_year($yearID);
+        $videos = get_videos();
+        $videos = get_videos();
         include('view\adminview.php');
         break;
-    case 'addrecipe':
-        $categories = get_categories();
-        include('view\addrecipeview.php');
+    case 'addvideo':
+        $years = get_years();
+        include('view\addvideoview.php');
         break;
-    case 'editrecipe':
-        $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        if ($recipeID == null) {
-            $recipeID = filter_input(INPUT_GET, 'recipeID', FILTER_SANITIZE_STRING);
+    case 'editvideo':
+        $videoID = filter_input(INPUT_POST, 'videoID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        if ($videoID == null) {
+            $videoID = filter_input(INPUT_GET, 'videoID', FILTER_SANITIZE_STRING);
         }
-        $recipe = get_recipe($recipeID);
-        $categories = get_categories();
-        include('view\editrecipeview.php');
+        $video = get_video($videoID);
+        $years = get_years();
+        include('view\editvideoview.php');
         break;
-    case 'saveeditrecipe':
-        $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        $recipeName = filter_input(INPUT_POST, 'recipeName', FILTER_SANITIZE_STRING);
-        $recipeCategory = filter_input(INPUT_POST, 'recipeCategory', FILTER_SANITIZE_STRING);
-        $recipeContributor = filter_input(INPUT_POST, 'recipeContributor', FILTER_SANITIZE_STRING);
-        $recipeImage = filter_input(INPUT_POST, 'recipeImage', FILTER_SANITIZE_STRING);
+    case 'saveeditvideo':
+        $videoID = filter_input(INPUT_POST, 'videoID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        $videoName = filter_input(INPUT_POST, 'videoName', FILTER_SANITIZE_STRING);
+        $videoYear = filter_input(INPUT_POST, 'videoYear', FILTER_SANITIZE_STRING);
+        $videoLocation = filter_input(INPUT_POST, 'videoLocation', FILTER_SANITIZE_STRING);
+        $videoEmbed = filter_input(INPUT_POST, 'videoEmbed', FILTER_SANITIZE_STRING);
         
-        $recipeIngredients = filter_input(INPUT_POST, 'recipeIngredients', FILTER_SANITIZE_STRING);
+        $videoPersonTag = filter_input(INPUT_POST, 'videoPersonTag', FILTER_SANITIZE_STRING);
         
-        $recipeInstructions = str_replace("\r",'<br>',filter_input(INPUT_POST, 'recipeInstructions', FILTER_SANITIZE_STRING));
+        $videoDescription = filter_input(INPUT_POST, 'videoDescription', FILTER_SANITIZE_STRING);
         
-        edit_recipe($recipeID, $recipeName, $recipeCategory, $recipeContributor, $recipeImage, $recipeIngredients, $recipeInstructions);
-        $recipes = get_recipes();
-        $categories = get_categories();
+        edit_video($videoID, $videoName, $videoYear, $videoLocation, $videoEmbed, $videoPersonTag, $videoDescription);
+        $videos = get_videos();
+        $years = get_years();
         include('view\adminview.php');
         break;
-    case 'saveaddrecipe':
-        $recipeName = filter_input(INPUT_POST, 'recipeName', FILTER_SANITIZE_STRING);
-        $recipeCategory = filter_input(INPUT_POST, 'recipeCategory', FILTER_SANITIZE_STRING);
-        $recipeContributor = filter_input(INPUT_POST, 'recipeContributor', FILTER_SANITIZE_STRING);
-        $recipeImage = filter_input(INPUT_POST, 'recipeImage', FILTER_SANITIZE_STRING);
+    case 'saveaddvideo':
+        $videoName = filter_input(INPUT_POST, 'videoName', FILTER_SANITIZE_STRING);
+        $videoYear = filter_input(INPUT_POST, 'videoYear', FILTER_SANITIZE_STRING);
+        $videoLocation = filter_input(INPUT_POST, 'videoLocation', FILTER_SANITIZE_STRING);
+        $videoEmbed = filter_input(INPUT_POST, 'videoEmbed', FILTER_SANITIZE_STRING);
         
-        $recipeIngredients = filter_input(INPUT_POST, 'recipeIngredients', FILTER_SANITIZE_STRING);
+        $videoPersonTag = filter_input(INPUT_POST, 'videoPersonTag', FILTER_SANITIZE_STRING);
         
-        $recipeInstructions = str_replace("\r",'<br>',filter_input(INPUT_POST, 'recipeInstructions', FILTER_SANITIZE_STRING));
+        $videoDescription = filter_input(INPUT_POST, 'videoDescription', FILTER_SANITIZE_STRING);
         
-        add_recipe($recipeName, $recipeCategory, $recipeContributor, $recipeImage, $recipeIngredients, $recipeInstructions);
-        $recipes = get_recipes();
-        $categories = get_categories();
+        add_video($videoName, $videoYear, $videoLocation, $videoEmbed, $videoPersonTag, $videoDescription);
+        $videos = get_videos();
+        $years = get_years();
         include('view\adminview.php');
         break;
-    case 'deleterecipe':
-        $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        delete_recipe($recipeID);
-        $recipes = get_recipes();
-        $categories = get_categories();
+    case 'deletevideo':
+        $videoID = filter_input(INPUT_POST, 'videoID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        delete_video($videoID);
+        $videos = get_videos();
+        $years = get_years();
         include('view\adminview.php');
         break;
+    
+    //DELETE THIS CASE
     case 'deleteimage':
         $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
         
@@ -135,15 +137,18 @@ switch ($action) {
         $categories = get_categories();
         include('view\adminview.php');
         break;
+        
     case 'confirmation':
-        $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        $recipeName = filter_input(INPUT_POST, 'recipeName', FILTER_SANITIZE_STRING);
-        $categoryID = filter_input(INPUT_POST, 'categoryID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        $categoryName = filter_input(INPUT_POST, 'categoryName', FILTER_SANITIZE_STRING);
+        $videoID = filter_input(INPUT_POST, 'videoID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        $videoName = filter_input(INPUT_POST, 'videoName', FILTER_SANITIZE_STRING);
+        $yearID = filter_input(INPUT_POST, 'yearID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
+        $year = filter_input(INPUT_POST, 'year', FILTER_SANITIZE_STRING);
         $subaction = filter_input(INPUT_POST, 'subaction', FILTER_SANITIZE_STRING);
         
         include('view\confirmationview.php');
         break;
+        
+    //DELETE THIS CASE
     case 'upload':
         $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
         $recipeName = filter_input(INPUT_POST, 'recipeName', FILTER_SANITIZE_STRING);

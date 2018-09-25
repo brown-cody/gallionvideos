@@ -26,19 +26,19 @@ function get_video($videoID) {
     $statement->closeCursor();
     return $video;
 }
-/*
-function get_recipes() {
+
+function get_videos() {
     global $db;
     
-    $query = 'SELECT * FROM recipe
-              ORDER BY recipeName';
+    $query = 'SELECT * FROM video
+              ORDER BY videoName';
     $statement = $db->prepare($query);
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
-
+/*
 function sort_recipes_by_category() {
     global $db;
     

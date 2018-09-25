@@ -2,7 +2,7 @@
         <footer>
             <hr>
             <br>
-            &copy; <?php echo date("Y"); ?> | Gallion Videos | Cody Brown<a href="/gallionvideos/admin/" class="hiddenLink">.</a>
+            &copy; <?php echo date("Y"); ?> | Tucker Gallion Video Library | Cody Brown<a href="/gallionvideos/admin/" class="hiddenLink">.</a>
         </footer>
     </body>
 
