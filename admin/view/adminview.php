@@ -14,7 +14,7 @@
             <?php echo "<tr><td>"; ?>
             <form action="index.php" method="post">
                 <input type="hidden" name="action" value="edityear">
-                <input type="hidden" name="yearID" value="<?php echo $category['yearID'];?>">
+                <input type="hidden" name="yearID" value="<?php echo $year['yearID'];?>">
                 <button type="submit" class="editButton">Edit</button>
             </form>
             <?php echo "</td><td>"; ?>

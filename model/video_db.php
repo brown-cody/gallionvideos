@@ -38,130 +38,130 @@ function get_videos() {
     $statement->closeCursor();
     return $videos;
 }
-/*
-function sort_recipes_by_category() {
+
+function sort_videos_by_year() {
     global $db;
     
-    $query = 'SELECT * FROM recipe
-              ORDER BY recipeCategory';
+    $query = 'SELECT * FROM video
+              ORDER BY videoYear';
     $statement = $db->prepare($query);
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
-function sort_recipes_by_contributor() {
+function sort_videos_by_location() {
     global $db;
-    $query = 'SELECT * FROM recipe
-              ORDER BY recipeContributor';
+    $query = 'SELECT * FROM video
+              ORDER BY videoLocation';
     $statement = $db->prepare($query);
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
-function sort_recipes_by_image() {
+function sort_videos_by_embed() {
     global $db;
-    $query = 'SELECT * FROM recipe
-              ORDER BY recipeImage';
+    $query = 'SELECT * FROM video
+              ORDER BY videoEmbed';
     $statement = $db->prepare($query);
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
-function sort_recipes_by_updated() {
+function sort_videos_by_updated() {
     global $db;
-    $query = 'SELECT * FROM recipe
-              ORDER BY recipeDateEdited DESC';
+    $query = 'SELECT * FROM video
+              ORDER BY videoDateEdited DESC';
     $statement = $db->prepare($query);
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
-function sort_recipes_by_created() {
+function sort_videos_by_created() {
     global $db;
-    $query = 'SELECT * FROM recipe
-              ORDER BY recipeDateAdded DESC';
+    $query = 'SELECT * FROM video
+              ORDER BY videoDateAdded DESC';
     $statement = $db->prepare($query);
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
 
 
-function get_recipes_by_contributor($recipeContributor) {
+function get_videos_by_location($videoLocation) {
     global $db;
-    $query = 'SELECT * FROM recipe
-              WHERE recipeContributor = :recipeContributor
-              ORDER BY recipeName';
+    $query = 'SELECT * FROM video
+              WHERE videoLocation = :videoLocation
+              ORDER BY videoName';
     $statement = $db->prepare($query);
-    $statement->bindValue(":recipeContributor", $recipeContributor);
+    $statement->bindValue(":videoLocation", $videoLocation);
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
-
-function set_recipe_image($recipeID, $recipeImage) {
+/*
+function set_video_Embed($videoID, $videoEmbed) {
     global $db;
-    $query = 'UPDATE recipe
-              SET recipeImage = :recipeImage
-              WHERE recipeID = :recipeID';
+    $query = 'UPDATE video
+              SET videoEmbed = :videoEmbed
+              WHERE videoID = :videoID';
     $statement = $db->prepare($query);
-    $statement->bindValue(':recipeImage', $recipeImage);
-    $statement->bindValue(':recipeID', $recipeID);
+    $statement->bindValue(':videoEmbed', $videoEmbed);
+    $statement->bindValue(':videoID', $videoID);
     $statement->execute();
     $statement->closeCursor();
-}
+}*/
 
-function add_recipe($recipeName, $recipeCategory, $recipeContributor, $recipeImage, $recipeIngredients, $recipeInstructions) {
+function add_video($videoName, $videoYear, $videoLocation, $videoEmbed, $videoPersonTag, $videoDescription) {
     global $db;
-    $query = 'INSERT INTO recipe
-                 (recipeName, recipeCategory, recipeContributor, recipeImage, recipeIngredients, recipeInstructions, recipeDateAdded, recipeDateEdited)
+    $query = 'INSERT INTO video
+                 (videoName, videoYear, videoLocation, videoEmbed, videoPersonTag, videoDescription, videoDateAdded, videoDateEdited)
               VALUES
-                 (:recipeName, :recipeCategory, :recipeContributor, :recipeImage, :recipeIngredients, :recipeInstructions, now(), now())';
+                 (:videoName, :videoYear, :videoLocation, :videoEmbed, :videoPersonTag, :videoDescription, now(), now())';
     $statement = $db->prepare($query);
-    $statement->bindValue(':recipeName', $recipeName);
-    $statement->bindValue(':recipeCategory', $recipeCategory);
-    $statement->bindValue(':recipeContributor', $recipeContributor);
-    $statement->bindValue(':recipeImage', $recipeImage);
-    $statement->bindValue(':recipeIngredients', $recipeIngredients);
-    $statement->bindValue(':recipeInstructions', $recipeInstructions);
+    $statement->bindValue(':videoName', $videoName);
+    $statement->bindValue(':videoYear', $videoYear);
+    $statement->bindValue(':videoLocation', $videoLocation);
+    $statement->bindValue(':videoEmbed', $videoEmbed);
+    $statement->bindValue(':videoPersonTag', $videoPersonTag);
+    $statement->bindValue(':videoDescription', $videoDescription);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function delete_recipe($recipeID) {
+function delete_video($videoID) {
     global $db;
-    $query = 'DELETE FROM recipe
-              WHERE recipeID = :recipeID';
+    $query = 'DELETE FROM video
+              WHERE videoID = :videoID';
     $statement = $db->prepare($query);
-    $statement->bindValue(':recipeID', $recipeID);
+    $statement->bindValue(':videoID', $videoID);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function edit_recipe($recipeID, $recipeName, $recipeCategory, $recipeContributor, $recipeImage, $recipeIngredients, $recipeInstructions) {
+function edit_video($videoID, $videoName, $videoYear, $videoLocation, $videoEmbed, $videoPersonTag, $videoDescription) {
     global $db;
-    $query = 'UPDATE recipe
-              SET recipeName = :recipeName, recipeCategory = :recipeCategory, recipeContributor = :recipeContributor, recipeImage = :recipeImage, recipeIngredients = :recipeIngredients, recipeInstructions = :recipeInstructions, recipeDateEdited = now()
-              WHERE recipeID = :recipeID';
+    $query = 'UPDATE video
+              SET videoName = :videoName, videoYear = :videoYear, videoLocation = :videoLocation, videoEmbed = :videoEmbed, videoPersonTag = :videoPersonTag, videoDescription = :videoDescription, videoDateEdited = now()
+              WHERE videoID = :videoID';
     $statement = $db->prepare($query);
-    $statement->bindValue(':recipeID', $recipeID);    
-    $statement->bindValue(':recipeName', $recipeName);
-    $statement->bindValue(':recipeCategory', $recipeCategory);
-    $statement->bindValue(':recipeContributor', $recipeContributor);
-    $statement->bindValue(':recipeImage', $recipeImage);
-    $statement->bindValue(':recipeIngredients', $recipeIngredients);
-    $statement->bindValue(':recipeInstructions', $recipeInstructions);
+    $statement->bindValue(':videoID', $videoID);    
+    $statement->bindValue(':videoName', $videoName);
+    $statement->bindValue(':videoYear', $videoYear);
+    $statement->bindValue(':videoLocation', $videoLocation);
+    $statement->bindValue(':videoEmbed', $videoEmbed);
+    $statement->bindValue(':videoPersonTag', $videoPersonTag);
+    $statement->bindValue(':videoDescription', $videoDescription);
     $success = $statement->execute();
     $statement->closeCursor();    
-}*/
+}

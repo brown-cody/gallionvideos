@@ -1,13 +1,13 @@
 <?php include("../header.php"); ?>
 
-    <h2>Add Category</h2>
+    <h2>Add Year</h2>
     
     <div class="formContainer">
         <form action="index.php" method="post" class="mainForm">
-            <input type="hidden" name="action" value="saveaddcategory">
+            <input type="hidden" name="action" value="saveaddyear">
 
-            <label for="categoryName" class="formLabel">Category Name:</label>
-            <input type="text" name="categoryName" id="categoryName" class="formInput submitButtonSpace" required>
+            <label for="year" class="formLabel">Year:</label>
+            <input type="text" name="year" id="year" class="formInput submitButtonSpace" required>
 
             <br>
             <button type="submit" class="mainButton submitButton">Submit</button>

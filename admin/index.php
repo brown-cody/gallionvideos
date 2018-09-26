@@ -27,14 +27,14 @@ switch ($action) {
             case 'locationsort':
                 $videos = sort_videos_by_location();
                 break;
-            case 'imagesort':
-                $recipes = sort_recipes_by_image();
+            case 'embedsort':
+                $videos = sort_videos_by_embed();
                 break;
             case 'updatedsort':
-                $recipes = sort_recipes_by_updated();
+                $videos = sort_videos_by_updated();
                 break;
             case 'createdsort':
-                $recipes = sort_recipes_by_created();
+                $videos = sort_videos_by_created();
                 break;
             default:
                 break;
@@ -126,18 +126,7 @@ switch ($action) {
         $years = get_years();
         include('view\adminview.php');
         break;
-    
-    //DELETE THIS CASE
-    case 'deleteimage':
-        $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        
-        unlink('../images/'.$recipeID.'.jpg');
-        set_recipe_image($recipeID, '0');
-        $recipes = get_recipes();
-        $categories = get_categories();
-        include('view\adminview.php');
-        break;
-        
+            
     case 'confirmation':
         $videoID = filter_input(INPUT_POST, 'videoID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
         $videoName = filter_input(INPUT_POST, 'videoName', FILTER_SANITIZE_STRING);
@@ -146,55 +135,6 @@ switch ($action) {
         $subaction = filter_input(INPUT_POST, 'subaction', FILTER_SANITIZE_STRING);
         
         include('view\confirmationview.php');
-        break;
-        
-    //DELETE THIS CASE
-    case 'upload':
-        $recipeID = filter_input(INPUT_POST, 'recipeID', FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
-        $recipeName = filter_input(INPUT_POST, 'recipeName', FILTER_SANITIZE_STRING);
-        $recipes = get_recipes();
-        $categories = get_categories();
-        
-        if(isset($_POST["SubmitBtn"])){
-            
-            $fileName=$_FILES["imageUpload".$recipeID]["name"];
-            $fileSize=$_FILES["imageUpload".$recipeID]["size"]/1024;
-            $fileType=$_FILES["imageUpload".$recipeID]["type"];
-            $fileTmpName=$_FILES["imageUpload".$recipeID]["tmp_name"];  
-
-            if ($fileName == null) {
-                $error = "No file selected. Click the thumbnail to select an image.";
-            } else if($fileType=="image/jpeg"){
-                if($fileSize<=5000){
-
-                //New file name
-                //$random=rand(1111,9999);
-                //$newFileName=$random.$fileName;
-
-                $newFileName = $recipeID.'.jpg';
-
-                //File upload path
-                $uploadPath="../images/".$newFileName;
-
-                //function for upload file
-                    if(move_uploaded_file($fileTmpName,$uploadPath)){
-                        $success = "Successful image upload for ".$recipeName;
-                        set_recipe_image($recipeID, '1');
-                    }
-                } else {
-                    $error = "Maximum upload file size limit is 5,000 kb";
-                    include('view\adminview.php');
-                    break;
-                }
-            } else {
-                $error = "You can only upload a JPEG.";
-                include('view\adminview.php');
-                break;
-            }  
-            
-        }
-        
-        include('view\adminview.php');
         break;
 
 }

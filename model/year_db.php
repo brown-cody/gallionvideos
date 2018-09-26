@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 function get_years() {
     global $db;
     
@@ -14,50 +11,49 @@ function get_years() {
     $statement->closeCursor();
     return $years;
 }
-/*
-function get_category($categoryID) {
+
+function get_year($yearID) {
     global $db;
-    $query = 'SELECT * FROM category
-              WHERE categoryID = :categoryID';
+    $query = 'SELECT * FROM year
+              WHERE yearID = :yearID';
     $statement = $db->prepare($query);
-    $statement->bindValue(":categoryID", $categoryID);
+    $statement->bindValue(":yearID", $yearID);
     $statement->execute();
-    $category = $statement->fetch();
+    $year = $statement->fetch();
     $statement->closeCursor();
-    return $category;
+    return $year;
 }
 
-function edit_category($categoryID, $categoryName) {
+function edit_year($yearID, $year) {
     global $db;
-    $query = 'UPDATE category
-              SET categoryName = :categoryName
-              WHERE categoryID = :categoryID';
+    $query = 'UPDATE year
+              SET year = :year
+              WHERE yearID = :yearID';
     $statement = $db->prepare($query);
-    $statement->bindValue(':categoryID', $categoryID);    
-    $statement->bindValue(':categoryName', $categoryName);
+    $statement->bindValue(':yearID', $yearID);    
+    $statement->bindValue(':year', $year);
     $success = $statement->execute();
     $statement->closeCursor();
 }
 
-function add_category($categoryName) {
+function add_year($year) {
     global $db;
-    $query = 'INSERT INTO category
-                (categoryName)
+    $query = 'INSERT INTO year
+                (year)
               VALUES
-                (:categoryName)';
+                (:year)';
     $statement = $db->prepare($query);
-    $statement->bindValue(":categoryName", $categoryName);
+    $statement->bindValue(":year", $year);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function delete_category($categoryID) {
+function delete_year($yearID) {
     global $db;
-    $query = 'DELETE FROM category
-              WHERE categoryID = :categoryID';
+    $query = 'DELETE FROM year
+              WHERE yearID = :yearID';
     $statement = $db->prepare($query);
-    $statement->bindValue(':categoryID', $categoryID);
+    $statement->bindValue(':yearID', $yearID);
     $statement->execute();
     $statement->closeCursor();
 }
-*/

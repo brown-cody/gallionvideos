@@ -7,14 +7,11 @@
         <?php
             
             switch ($subaction) {
-                case 'deletecategory':
-                    echo "category?"; 
+                case 'deleteyear':
+                    echo "year?"; 
                     break;
-                case 'deleterecipe':
-                    echo "recipe?";
-                    break;
-                case 'deleteimage':
-                    echo "image?";
+                case 'deletevideo':
+                    echo "video?";
                     break;
             }
         
@@ -22,18 +19,16 @@
         
     </h3>
     <br>
-    <h3 class="delete"><?php echo $categoryName; ?></h3>
-    <h3 class="delete"><?php echo $recipeName; ?></h3>
+    <h3 class="delete"><?php echo $year; ?></h3>
+    <h3 class="delete"><?php echo $videoName; ?></h3>
 
 
     <form action="index.php" method="post">
         <input type="hidden" name="action" value="<?php echo $subaction; ?>">
         
-        <input type="hidden" name="categoryID" value="<?php echo $categoryID; ?>">
+        <input type="hidden" name="yearID" value="<?php echo $yearID; ?>">
     
-        <input type="hidden" name="recipeID" value="<?php echo $recipeID; ?>">
-    
-        <input type="hidden" name="imageName" value="<?php echo $imageName; ?>">
+        <input type="hidden" name="videoID" value="<?php echo $videoID; ?>">
         
         <button type="submit" class="mainButton delete">Yes, Delete</button>
 
@@ -44,15 +39,7 @@
                 
         <button type="submit" class="mainButton">Cancel</button>
 
-    </form>
-
-    <?php
-        if ($subaction == 'deleteimage') {
-            echo '<img src="../images/'.$recipeID.'.jpg" class="image">';
-        }
-    ?>
-
-    
+    </form>   
     
 
         
