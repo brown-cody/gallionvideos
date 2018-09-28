@@ -126,8 +126,8 @@ h4 {
 
 .video {
     padding:1em;
-    width:400px;
-    height:300px;
+    width:325px;
+    height:244px;
     display:block;
     margin:auto;
 }
@@ -316,9 +316,9 @@ footer {
 
 @media only screen and (min-width: 390px) {
     
-    header {
-        /*width:390px;*/
-    }
+    /*html {
+        background:green;
+    }*/
     
     .logo {
         max-width: 75px;
@@ -339,9 +339,9 @@ footer {
 
 @media only screen and (min-width: 475px) {
     
-    header {
-        /*width:475px;*/
-    }
+    /*html {
+        background:blue;
+    }*/
     
     .logo {
         max-width: 100px;
@@ -353,6 +353,12 @@ footer {
         margin-top:.5em;
     }
     
+    .video {
+        width:400px;
+        height:300px;
+    }
+    
+    
     .hideContributor {
         display:table-cell;
     }
@@ -360,9 +366,9 @@ footer {
 
 @media only screen and (min-width: 850px) {
     
-    header {
-        /*width:870px;*/
-    }
+    /*html {
+        background:red;
+    }*/
     
     .pageTitle {
         width:14em;
