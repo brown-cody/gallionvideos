@@ -3,54 +3,54 @@
 function search_name($searchText) {
     global $db;
     
-    $query = 'SELECT * FROM recipe
-              WHERE recipeName LIKE :searchText';
+    $query = 'SELECT * FROM video
+              WHERE videoName LIKE :searchText';
     $statement = $db->prepare($query);
     $statement->bindValue(":searchText", '%'.$searchText.'%');
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
-function search_contributor($searchText) {
+function search_location($searchText) {
     global $db;
     
-    $query = 'SELECT DISTINCT recipeContributor
-              FROM recipe
-              WHERE recipeContributor LIKE :searchText';
+    $query = 'SELECT DISTINCT videoLocation
+              FROM video
+              WHERE videoLocation LIKE :searchText';
     $statement = $db->prepare($query);
     $statement->bindValue(":searchText", '%'.$searchText.'%');
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
-function search_ingredients($searchText) {
+function search_people($searchText) {
     global $db;
     
-    $query = 'SELECT * FROM recipe
-              WHERE recipeIngredients LIKE :searchText';
+    $query = 'SELECT * FROM video
+              WHERE videoPersonTag LIKE :searchText';
     $statement = $db->prepare($query);
     $statement->bindValue(":searchText", '%'.$searchText.'%');
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
-function search_Instructions($searchText) {
+function search_description($searchText) {
     global $db;
     
-    $query = 'SELECT * FROM recipe
-              WHERE recipeInstructions LIKE :searchText';
+    $query = 'SELECT * FROM video
+              WHERE videoDescription LIKE :searchText';
     $statement = $db->prepare($query);
     $statement->bindValue(":searchText", '%'.$searchText.'%');
     $statement->execute();
-    $recipes = $statement->fetchAll();
+    $videos = $statement->fetchAll();
     $statement->closeCursor();
-    return $recipes;
+    return $videos;
 }
 
 ?>

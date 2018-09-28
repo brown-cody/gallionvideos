@@ -5,7 +5,7 @@ require('model/database.php');
 // Get the models
 require('model/year_db.php');
 require('model/video_db.php');
-//require('model/search_db.php');
+require('model/search_db.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 if ($action == NULL) {
@@ -43,10 +43,10 @@ switch ($action) {
     case 'search':
         $searchText = filter_input(INPUT_POST, 'searchText', FILTER_SANITIZE_STRING);
         
-        $searchNames = search_name($searchText);
-        $searchContributors = search_contributor($searchText);
-        $searchIngredients = search_ingredients($searchText);
-        $searchInstructions = search_instructions($searchText);
+        $searchName = search_name($searchText);
+        $searchLocation = search_location($searchText);
+        $searchPeople = search_people($searchText);
+        $searchDescription = search_description($searchText);
         
         include('searchresults.php');
         break;

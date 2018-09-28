@@ -2,49 +2,49 @@
 
     <h2>Search Results</h2>
     
-    <?php if($searchNames != null){echo '<br><h3>Recipes</h3>';}?>
-    <?php foreach ($searchNames as $recipe): ?>
+    <?php if($searchName != null){echo '<br><h3>Videos</h3>';}?>
+    <?php foreach ($searchName as $video): ?>
         <form action="index.php" method="get">
-            <input type="hidden" name="action" value="recipeview">
-            <input type="hidden" name="recipeID" value="<?php echo $recipe['recipeID'];?>">
-            <button class="recipeButton" type="submit"><?php echo $recipe['recipeName'];?></button>
+            <input type="hidden" name="action" value="videoview">
+            <input type="hidden" name="videoID" value="<?php echo $video['videoID'];?>">
+            <button class="videoButton" type="submit"><?php echo $video['videoName'];?></button>
         </form>
     <?php endforeach; ?>
     
-    <?php if($searchIngredients != null){echo '<br><h3>Ingredients</h3>';}?>
-    <?php foreach ($searchIngredients as $recipe): ?>
+    <?php if($searchPeople != null){echo '<br><h3>People</h3>';}?>
+    <?php foreach ($searchPeople as $video): ?>
         <form action="index.php" method="get">
-            <input type="hidden" name="action" value="recipeview">
-            <input type="hidden" name="recipeID" value="<?php echo $recipe['recipeID'];?>">
-            <button class="recipeButton" type="submit"><?php echo $recipe['recipeName'];?></button>
+            <input type="hidden" name="action" value="videoview">
+            <input type="hidden" name="videoID" value="<?php echo $video['videoID'];?>">
+            <button class="videoButton" type="submit"><?php echo $video['videoName'];?></button>
         </form>
 
 
 
     <?php endforeach; ?>
     
-    <?php if($searchInstructions != null){echo '<br><h3>Instructions</h3>';}?>
-    <?php foreach ($searchInstructions as $recipe): ?>
+    <?php if($searchDescription != null){echo '<br><h3>Description</h3>';}?>
+    <?php foreach ($searchDescription as $video): ?>
         <form action="index.php" method="get">
-            <input type="hidden" name="action" value="recipeview">
-            <input type="hidden" name="recipeID" value="<?php echo $recipe['recipeID'];?>">
-            <button class="recipeButton" type="submit"><?php echo $recipe['recipeName'];?></button>
+            <input type="hidden" name="action" value="videoview">
+            <input type="hidden" name="videoID" value="<?php echo $video['videoID'];?>">
+            <button class="videoButton" type="submit"><?php echo $video['videoName'];?></button>
         </form>
 
         
     <?php endforeach; ?>
     
-    <?php if($searchContributors != null){echo '<br><h3>Contributors</h3>';}?>
-    <?php foreach ($searchContributors as $recipe): ?>
+    <?php if($searchLocation != null){echo '<br><h3>Location</h3>';}?>
+    <?php foreach ($searchLocation as $video): ?>
         <form action="index.php" method="get">
             <input type="hidden" name="action" value="contributorview">
-            <input type="hidden" name="recipeContributor" value="<?php echo $recipe['recipeContributor'];?>">
-            <button class="recipeButton" type="submit"><?php echo $recipe['recipeContributor'];?></button>
+            <input type="hidden" name="videoLocation" value="<?php echo $video['videoLocation'];?>">
+            <button class="videoButton" type="submit"><?php echo $video['videoLocation'];?></button>
         </form>
         
     <?php endforeach; ?>
 
-    <?php if($searchNames == null && $searchIngredients == null && $searchInstructions == null && $searchContributors == null) {
+    <?php if($searchName == null && $searchPeople == null && $searchDescription == null && $searchLocation == null) {
         echo '<br><h3>No Results</h3>';
     } ?>
 
